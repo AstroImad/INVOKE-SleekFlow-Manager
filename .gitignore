@@ -1,0 +1,47 @@
+# ──────────────────────────────────────────────
+#  SLEEKFLOW — .gitignore (Cleaned)
+# ──────────────────────────────────────────────
+
+# Secrets and Environments
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# Python Byte-compiled / Cache files
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+*$py.class
+
+# Streamlit
+.streamlit/  # This ignores the whole folder, including secrets.toml
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+
+# Logs and Databases
+*.log
+*.sqlite3
+*.db
+
+# Distribution / Packaging
+dist/
+build/
+*.egg-info/
