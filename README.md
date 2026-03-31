@@ -36,16 +36,6 @@ streamlit run app.py
 2. Go to **Settings → API / Integrations**
 3. Copy your API key
 
-## Streamlit Secrets (Production)
-For a more secure setup, store secrets in `.streamlit/secrets.toml`:
-```toml
-APP_PASSWORD = "your-secure-password"
-SLEEKFLOW_API_KEY = "your-api-key"   # optional default
-```
-Then in `app.py` use:
-```python
-APP_PASSWORD = st.secrets.get("APP_PASSWORD", "sleekflow2024")
-```
 
 ## API Endpoints Used
 | Feature | Endpoint |
