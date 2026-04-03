@@ -40,6 +40,7 @@ streamlit run app.py
 ## API Endpoints Used
 | Feature | Endpoint |
 |---|---|
+| Analytics | `GET /api/analytics` |
 | Conversations list | `GET /conversation` |
 | Messages in thread | `GET /conversation/{id}/message` |
 | Send WhatsApp message | `POST /message/send/whatsapp` |
