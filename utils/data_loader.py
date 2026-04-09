@@ -13,6 +13,7 @@ class APIClient:
         self.api_key = api_key
         self.base_url = base_url.rstrip("/")
         self.auth_format = auth_format
+        self.header = self._get_header()
 
 # ─────────────────────────────────────────────
 # API HELPERS
@@ -42,8 +43,8 @@ class APIClient:
             r.raise_for_status()
             return r.json(), None
 
-        except requests.exceptions.HTTPError:
-            return None, f"HTTP {r.status_code} - {r.text}"
+        except requests.exceptions.HTTPError as e:
+            return None, f"HTTP {e.response.status_code} - {e.response.text}"
         except Exception as e:
             return None, str(e)
 
@@ -59,8 +60,8 @@ class APIClient:
             r.raise_for_status()
             return r.json(), None
         
-        except requests.exceptions.HTTPError:
-            return None, f"HTTP {r.status_code} - {r.text}"
+        except requests.exceptions.HTTPError as e:
+            return None, f"HTTP {e.response.status_code} - {e.response.text}"
         except Exception as e:
             return None, str(e)
 
@@ -69,7 +70,21 @@ class APIClient:
 # ─────────────────────────────────────────────
     @st.cache_data(ttl=600, show_spinner=False)
     def fetch_channels(self) -> tuple:
-        return self.api_get("api/conversation/channel")
+        """Fetches all connected message channels from SleekFlow."""
+        data, err = self.api_get("/api/conversation/channel")
+
+        if err:
+            return [], err
+
+        if isinstance(data, list):
+            return data, None
+            
+        for key in ["data", "channels", "items", "result"]:
+            if key in data and isinstance(data[key], list):
+                return data[key], None
+                
+        return [], None
+    
 
 # ─────────────────────────────────────────────
 # Analytics API
