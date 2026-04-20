@@ -29,6 +29,22 @@ api_key = st.session_state.api_key
 with st.spinner("Loading channels..."):
     channels, ch_err = client.fetch_channels(api_key)
 
-channel_option = {"🌐 All Numbers (Account-wide)": None}
+channel_options = {"🌐 All Numbers (Account-wide)": None}
+
 for ch in channels:
+    # Notice how everything below is pushed in by 4 spaces!
+    if not isinstance(ch, dict):
+        continue
     
+    cid  = (ch.get("id") or ch.get("channelId") or
+            ch.get("phoneNumberId") or ch.get("_id"))
+    
+    name = (ch.get("name") or ch.get("channelName") or
+            ch.get("displayName") or ch.get("phoneNumber") or
+            ch.get("identifier") or str(cid))
+    
+    ctype = str(ch.get("type") or ch.get("channelType") or "")
+    icon  = "📱" if "whatsapp" in ctype.lower() else "💬"
+    
+    if cid:
+        channel_options[f"{icon} {name}"] = cid

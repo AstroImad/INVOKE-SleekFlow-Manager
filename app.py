@@ -19,17 +19,14 @@ st.set_page_config(
     page_title="SleekFlow Manager",
     page_icon="💬✅",
     layout="wide",
-    initial_sidebar_state="expanded",
-    menu_items={
-        'Get Help or Report an Issue': 'imadduddin@invokeisdata.com',
-    }
+    initial_sidebar_state="expanded"
 )
 
 load_css()
 init_session()
 
 if check_auth():
-    st.switch_page("pages/dashboard.py")
+    st.switch_page("pages/1_📊_Dashboard.py")
 
 # ─────────────────────────────────────────────
 #  CUSTOM CSS for Login box HTML  (light, clean, professional)
@@ -57,7 +54,7 @@ password = st.text_input(
 if st.button("Sign In →", type="primary", use_container_width=True):
     if password == _APP_PASSWORD:
         st.session_state.authenticated = True
-        st.switch_page("pages/dashboard.py")
+        st.switch_page("pages/1_📊_Dashboard.py")
     else:
         st.error("Incorrect password. Please try again.") 
 
